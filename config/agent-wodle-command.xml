@@ -1,0 +1,9 @@
+  <wodle name="command">
+    <disabled>no</disabled>
+    <tag>suspicious-processes</tag>
+    <command>pgrep -af backdoor</command>
+    <interval>20s</interval>
+    <ignore_output>no</ignore_output>
+    <run_on_start>yes</run_on_start>
+    <timeout>0</timeout>
+  </wodle>
