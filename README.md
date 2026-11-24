@@ -17,12 +17,14 @@ real, reproducible, and evidence-backed (see `evidence/`).
       ^ scanned
 [ GREENBONE ]   — Greenbone CE / OpenVAS (vulnerability management; scans the target)
 [ DC01 ]       — Samba AD DC (domain controller for LAB.LOCAL — identity + hardening)
+[ WIN11 ]      — Windows 11 Pro ARM64 endpoint (domain-joined; Sysmon + Wazuh agent → SIEM)
 ```
 
 - Hypervisor: UTM (native arm64, Shared NAT — never bridged).
-- All four VMs are Ubuntu Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
+- Ubuntu machines are Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
+- WIN11 is Windows 11 Pro ARM64 under Parallels (UTM cannot boot the Windows 11 ARM64 installer).
 
-## What's built (Phases 1–4)
+## What's built (Phases 1–5)
 
 **Phase 1 — SIEM core**: Elasticsearch (single node, security off for isolated lab),
 Kibana, and the Wazuh manager, wired so agents' logs and security events flow into
@@ -52,6 +54,11 @@ domain controller (domain `LAB.LOCAL`). Password/account policy hardened
 (min length 14, max age 60, lockout threshold 5); Kerberos + DNS verified.
 See `evidence/PHASE4_AD.md`.
 
+**Phase 5 — Windows endpoint + Sysmon → SIEM**: a Windows 11 Pro ARM64 VM (Parallels)
+was domain-joined to `LAB.LOCAL`, instrumented with **Sysmon** (SwiftOnSecurity config),
+and enrolled as a **Wazuh agent** (`002/WIN11`, Active), streaming Windows + Sysmon
+telemetry into the SIEM for detection. See `evidence/PHASE5_WINDOWS_SYSMON.md`.
+
 ## Repository layout
 
 ```
@@ -61,6 +68,7 @@ evidence/PHASE1_CHECKPOINT.md      # SIEM core bring-up evidence (versions, heal
 evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
 evidence/PHASE3_OPENVAS.md         # OpenVAS scan + severity breakdown + reproduction
 evidence/PHASE4_AD.md               # Samba AD DC: domain build + password/account hardening
+evidence/PHASE5_WINDOWS_SYSMON.md   # Windows 11: domain join + Sysmon + Wazuh agent → SIEM
 ```
 
 ## Reproduce
