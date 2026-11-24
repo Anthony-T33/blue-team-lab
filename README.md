@@ -69,6 +69,7 @@ evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
 evidence/PHASE3_OPENVAS.md         # OpenVAS scan + severity breakdown + reproduction
 evidence/PHASE4_AD.md               # Samba AD DC: domain build + password/account hardening
 evidence/PHASE5_WINDOWS_SYSMON.md   # Windows 11: domain join + Sysmon + Wazuh agent → SIEM
+HOW_TO_RUN.md                      # quick-start: bring the lab up + demonstrate each phase
 ```
 
 ## Reproduce
