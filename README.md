@@ -16,12 +16,13 @@ real, reproducible, and evidence-backed (see `evidence/`).
 [ UBUNTU-TARGET ] — Wazuh agent (the "endpoint": brute-forced, tampered, backdoored)
       ^ scanned
 [ GREENBONE ]   — Greenbone CE / OpenVAS (vulnerability management; scans the target)
+[ DC01 ]       — Samba AD DC (domain controller for LAB.LOCAL — identity + hardening)
 ```
 
 - Hypervisor: UTM (native arm64, Shared NAT — never bridged).
-- All three VMs are Ubuntu Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
+- All four VMs are Ubuntu Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
 
-## What's built (Phases 1–3)
+## What's built (Phases 1–4)
 
 **Phase 1 — SIEM core**: Elasticsearch (single node, security off for isolated lab),
 Kibana, and the Wazuh manager, wired so agents' logs and security events flow into
@@ -46,6 +47,11 @@ three custom detection rules were written and validated against simulated attack
 GSA web UI. A "Full and fast" scan of UBUNTU-TARGET produced 23 results (SSH hardening
 findings, TCP/ICMP timestamp disclosure, open port 4444). See `evidence/PHASE3_OPENVAS.md`.
 
+**Phase 4 — Active Directory hardening**: a fourth VM runs a Samba AD
+domain controller (domain `LAB.LOCAL`). Password/account policy hardened
+(min length 14, max age 60, lockout threshold 5); Kerberos + DNS verified.
+See `evidence/PHASE4_AD.md`.
+
 ## Repository layout
 
 ```
@@ -54,6 +60,7 @@ config/agent-wodle-command.xml     # suspicious-process monitoring (wodle comman
 evidence/PHASE1_CHECKPOINT.md      # SIEM core bring-up evidence (versions, health, URLs)
 evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
 evidence/PHASE3_OPENVAS.md         # OpenVAS scan + severity breakdown + reproduction
+evidence/PHASE4_AD.md               # Samba AD DC: domain build + password/account hardening
 ```
 
 ## Reproduce
