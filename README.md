@@ -6,6 +6,15 @@ hunting, and incident triage** — the day-to-day work of a SOC / blue-team anal
 Everything runs locally on Apple silicon using UTM virtual machines. All detection is
 real, reproducible, and evidence-backed (see `evidence/`).
 
+## Start here
+
+- **📖 [PROJECT.md](PROJECT.md)** — the full build write-up: what each tool does, why it
+  exists, and how it maps to real enterprise security tools.
+- **🧪 [PRACTICE.md](PRACTICE.md)** — step-by-step runbook to re-run the lab and practise
+  the SOC workflow (detect a brute-force attack, run a vulnerability scan, verify AD
+  hardening, confirm endpoint telemetry).
+- **🚀 [HOW_TO_RUN.md](HOW_TO_RUN.md)** — quick-start to bring the environment up.
+
 ## Architecture
 
 ```
