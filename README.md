@@ -53,6 +53,10 @@ three custom detection rules were written and validated against simulated attack
 - **Tampering** — appended C2 hostnames to `/etc/hosts`, dropped a file in `/etc` → rule 100200.
 - **Backdoor** — renamed `/bin/nc` to `/tmp/.malware/backdoor`, listening on 4444 → rule 100300 (via the command wodle).
 
+![Kibana Discover showing the brute-force alert (rule 100100)](img/kibana-brute-force-alert.png)
+
+*Kibana Discover — rule `100100` fired: three brute-force alerts; the top one is from the simulated attacker (source IP `192.168.64.1`, user `hacker`).*
+
 **Phase 3 — vulnerability management**: a third VM runs Greenbone Community Edition
 (OpenVAS) in Docker — `gvmd`, `openvasd`/`ospd-openvas`, `pg-gvm` (PostgreSQL), and the
 GSA web UI. A "Full and fast" scan of UBUNTU-TARGET produced 23 results (SSH hardening
