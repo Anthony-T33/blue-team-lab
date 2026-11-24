@@ -75,14 +75,18 @@ telemetry into the SIEM for detection. See `evidence/PHASE5_WINDOWS_SYSMON.md`.
 ## Repository layout
 
 ```
-rules/local_rules.xml              # the 3 custom Wazuh detection rules
-config/agent-wodle-command.xml     # suspicious-process monitoring (wodle command)
-evidence/PHASE1_CHECKPOINT.md      # SIEM core bring-up evidence (versions, health, URLs)
-evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
-evidence/PHASE3_OPENVAS.md         # OpenVAS scan + severity breakdown + reproduction
-evidence/PHASE4_AD.md               # Samba AD DC: domain build + password/account hardening
-evidence/PHASE5_WINDOWS_SYSMON.md   # Windows 11: domain join + Sysmon + Wazuh agent → SIEM
-HOW_TO_RUN.md                      # quick-start: bring the lab up + demonstrate each phase
+PROJECT.md                                # full build write-up: architecture, tools, rationale
+PRACTICE.md                               # step-by-step runbook to re-run the lab and practise
+HOW_TO_RUN.md                             # quick-start: bring the lab up + demonstrate each phase
+rules/local_rules.xml                     # the 3 custom Wazuh detection rules
+config/agent-wodle-command.xml            # suspicious-process monitoring (wodle command)
+evidence/PHASE1_CHECKPOINT.md             # SIEM core bring-up (versions, health, URLs)
+evidence/PHASE2_FINDINGS.md               # alert triage + verdicts + MITRE mapping
+evidence/PHASE2_LIVE_BRUTEFORCE_DEMO.md   # live brute-force detection demo (rule 100100)
+evidence/PHASE3_OPENVAS.md                # OpenVAS scan + severity breakdown + reproduction
+evidence/PHASE4_AD.md                     # Samba AD DC: domain build + password/account hardening
+evidence/PHASE5_WINDOWS_SYSMON.md         # Windows 11: domain join + Sysmon + Wazuh agent → SIEM
+img/kibana-brute-force-alert.png          # screenshot of the brute-force alert in Kibana
 ```
 
 ## Reproduce
