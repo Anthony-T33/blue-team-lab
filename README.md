@@ -14,12 +14,14 @@ real, reproducible, and evidence-backed (see `evidence/`).
       |  TCP 1514 / Filebeat -> Elasticsearch (wazuh-alerts-* index)
       |
 [ UBUNTU-TARGET ] — Wazuh agent (the "endpoint": brute-forced, tampered, backdoored)
+      ^ scanned
+[ GREENBONE ]   — Greenbone CE / OpenVAS (vulnerability management; scans the target)
 ```
 
 - Hypervisor: UTM (native arm64, Shared NAT — never bridged).
-- Both VMs are Ubuntu Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
+- All three VMs are Ubuntu Server 24.04 (arm64), SSH access via key, sudo NOPASSWD.
 
-## What's built (Phase 1 & 2)
+## What's built (Phases 1–3)
 
 **Phase 1 — SIEM core**: Elasticsearch (single node, security off for isolated lab),
 Kibana, and the Wazuh manager, wired so agents' logs and security events flow into
@@ -39,6 +41,11 @@ three custom detection rules were written and validated against simulated attack
 - **Tampering** — appended C2 hostnames to `/etc/hosts`, dropped a file in `/etc` → rule 100200.
 - **Backdoor** — renamed `/bin/nc` to `/tmp/.malware/backdoor`, listening on 4444 → rule 100300 (via the command wodle).
 
+**Phase 3 — vulnerability management**: a third VM runs Greenbone Community Edition
+(OpenVAS) in Docker — `gvmd`, `openvasd`/`ospd-openvas`, `pg-gvm` (PostgreSQL), and the
+GSA web UI. A "Full and fast" scan of UBUNTU-TARGET produced 23 results (SSH hardening
+findings, TCP/ICMP timestamp disclosure, open port 4444). See `evidence/PHASE3_OPENVAS.md`.
+
 ## Repository layout
 
 ```
@@ -46,6 +53,7 @@ rules/local_rules.xml              # the 3 custom Wazuh detection rules
 config/agent-wodle-command.xml     # suspicious-process monitoring (wodle command)
 evidence/PHASE1_CHECKPOINT.md      # SIEM core bring-up evidence (versions, health, URLs)
 evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
+evidence/PHASE3_OPENVAS.md         # OpenVAS scan + severity breakdown + reproduction
 ```
 
 ## Reproduce
@@ -54,5 +62,6 @@ evidence/PHASE2_FINDINGS.md        # alert triage + verdicts + MITRE mapping
    and restart `wazuh-manager`.
 2. Add `config/agent-wodle-command.xml` to the agent's `ossec.conf` and restart `wazuh-agent`.
 3. Fire the simulations above and confirm alerts in Kibana (index `wazuh-alerts-*`).
+4. For vulnerability scanning, follow `evidence/PHASE3_OPENVAS.md` (Greenbone CE in Docker).
 
 > No credentials, private keys, or personal data are stored in this repository.
