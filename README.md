@@ -8,12 +8,13 @@ real, reproducible, and evidence-backed (see `evidence/`).
 
 ## Start here
 
-- **📖 [PROJECT.md](PROJECT.md)** — the full build write-up: what each tool does, why it
+- **📖 [PROJECT.md](PROJECT.md)** — the full build write-up: architecture, tools, phases, and the live demo.
   exists, and how it maps to real enterprise security tools.
 - **🧪 [PRACTICE.md](PRACTICE.md)** — step-by-step runbook to re-run the lab and practise
   the SOC workflow (detect a brute-force attack, run a vulnerability scan, verify AD
   hardening, confirm endpoint telemetry).
 - **🚀 [HOW_TO_RUN.md](HOW_TO_RUN.md)** — quick-start to bring the environment up.
+- **💡 [RATIONALE.md](RATIONALE.md)** — *why* each component exists and what real-world enterprise tool it maps to.
 
 ## Architecture
 
@@ -78,6 +79,7 @@ telemetry into the SIEM for detection. See `evidence/PHASE5_WINDOWS_SYSMON.md`.
 PROJECT.md                                # full build write-up: architecture, tools, rationale
 PRACTICE.md                               # step-by-step runbook to re-run the lab and practise
 HOW_TO_RUN.md                             # quick-start: bring the lab up + demonstrate each phase
+RATIONALE.md                              # the 'why': component rationale + real-world mapping
 rules/local_rules.xml                     # the 3 custom Wazuh detection rules
 config/agent-wodle-command.xml            # suspicious-process monitoring (wodle command)
 evidence/PHASE1_CHECKPOINT.md             # SIEM core bring-up (versions, health, URLs)
