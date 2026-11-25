@@ -1,6 +1,6 @@
 # Home Blue-Team Security Lab — Build Write-Up
 
-**Author:** Anthony Osaheni Omwanghe · **Repo:** github.com/Anthony-T33/blue-team-lab
+**Author:** Anthony Osaheni Omwanghe · **Repo:** github.com/AnthonyOmwanghe/blue-team-lab
 
 ## 1. Objective
 
